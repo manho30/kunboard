@@ -28,7 +28,7 @@ def resource_path(relative_path):
 
 root = tkinter.Tk()
 windll.shcore.SetProcessDpiAwareness(1)
-root.title('坤音键盘')
+root.title('坤音键盘v2.0.0')
 root.geometry('500x400')
 root.wm_attributes("-topmost", True)
 #icon
@@ -38,7 +38,7 @@ root.iconphoto(False, tkinter.PhotoImage(file=resource_path(os.path.join('public
 
 def start():
     Thread(target=main_program, args=('start',)).start()
-    tkinter.messagebox.showinfo('提示', '坤音键盘已启动\n版本：1.1.0\n作者：manho')
+    tkinter.messagebox.showinfo('提示', '坤音键盘已启动\n版本：2.0.0\n作者：manho')
 
 def _exit():
     root.destroy()
@@ -56,12 +56,17 @@ def _log():
     txt.configure(yscrollcommand=scrollb.set)
     txt.pack(side=tkinter.LEFT, fill=tkinter.BOTH, expand=1)
     scrollb.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+    txt.insert(tkinter.END, '2021-11-28 19:24\n')
+    txt.insert(tkinter.END, '新增3个音效\n')
+    txt.insert(tkinter.END, '版本：2.0.0\n')
+    txt.insert(tkinter.END, '作者：manho\n')
+    txt.insert(tkinter.END, '--------------------------\n')
     txt.insert(tkinter.END, '2021-11-28 16:09\n')
     txt.insert(tkinter.END, '修复了窗口无反应问题\n')
     txt.insert(tkinter.END, '版本：1.1.0\n')
     txt.insert(tkinter.END, '作者：manho\n')
     txt.insert(tkinter.END, '--------------------------\n')
-    txt.insert(tkinter.END, '2021-11-28 11:29n')
+    txt.insert(tkinter.END, '2021-11-28 11:29\n')
     txt.insert(tkinter.END, '坤音键盘已启动\n')
     txt.insert(tkinter.END, '版本：1.0.0\n')
     txt.insert(tkinter.END, '作者：manho\n')
@@ -101,13 +106,16 @@ ch2audio = {
     'n': resource_path(os.path.join("audios", "n.mp3")),
     't': resource_path(os.path.join("audios", "t.mp3")),
     'm': resource_path(os.path.join("audios", "m.mp3")),
+    'g': resource_path(os.path.join("audios", "g.mp3")),
+    'a': resource_path(os.path.join("audios", "a.mp3")),
     'J': resource_path(os.path.join("audios", "j.mp3")),
     'N': resource_path(os.path.join("audios", "n.mp3")),
     'T': resource_path(os.path.join("audios", "t.mp3")),
     'M': resource_path(os.path.join("audios", "m.mp3")),
-    'Key.space': resource_path(os.path.join("audios", "ngm.mp3")),
+    'G': resource_path(os.path.join("audios", "g.mp3")),
+    'A': resource_path(os.path.join("audios", "a.mp3")),
+    'ngm': resource_path(os.path.join("audios", "ngm.mp3")),
 }
-
 def on_press(key):
     try:
         ch = key.char
@@ -115,7 +123,8 @@ def on_press(key):
             play_radio(ch2audio[ch])
 
     except AttributeError:
-        pass
+        if key == key.space or key == key.enter:
+            play_radio(ch2audio['ngm'])
 
 def on_release(key):
     if key == pynput.keyboard.Key.esc:
