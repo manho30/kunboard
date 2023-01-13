@@ -1,4 +1,4 @@
 pynput==1.7.6
 playsound==1.2.2
-future==0.18.2
+future==0.18.3
 tkinter==8.6
