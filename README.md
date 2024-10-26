@@ -43,5 +43,5 @@ datas = datas=[('audios','audios'),('public','public')]
 
 ###  运行
 ``` sh
-$ pyinstaller .\qt_util.spe
+$ pyinstaller .\utils.spe
 ```
